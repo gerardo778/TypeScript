@@ -25,74 +25,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function generator() {
+function infiniteSequence() {
+    var i;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log('Execution	started');
-                return [4 /*yield*/, 0];
+                i = 0;
+                _a.label = 1;
             case 1:
-                _a.sent();
-                console.log('Execution	resumed');
-                return [4 /*yield*/, 1];
+                if (!true) return [3 /*break*/, 3];
+                return [4 /*yield*/, i++];
             case 2:
                 _a.sent();
-                console.log('Execution	resumed');
-                return [2 /*return*/];
-        }
-    });
-}
-var iterator = generator();
-console.log('Starting	iteration');
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
-function generator2() {
-    var err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, 'foo'];
-            case 1:
-                _a.sent();
-                throw Error("Test");
-            case 2:
-                err_1 = _a.sent();
-                console.log(err_1.message); // bar!
-                return [3 /*break*/, 3];
+                return [3 /*break*/, 1];
             case 3: return [2 /*return*/];
         }
     });
 }
-var iterator2 = generator2();
-var foo = iterator2.next();
-console.log(foo.value);
-var foo = iterator2.next();
-function getFirstName() {
-    setTimeout(function () {
-        gen.next('alex');
-    }, 1000);
+var iterator = infiniteSequence();
+while (true) {
+    console.log(iterator.next());
 }
-function getSecondName() {
-    setTimeout(function () {
-        gen.next('perry');
-    }, 1000);
-}
-function sayHello() {
-    var a, b;
+function idMaker() {
+    var index;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getFirstName()];
+            case 0:
+                index = 0;
+                _a.label = 1;
             case 1:
-                a = _a.sent();
-                return [4 /*yield*/, getSecondName()];
+                if (!(index < 3)) return [3 /*break*/, 3];
+                return [4 /*yield*/, index++];
             case 2:
-                b = _a.sent();
-                console.log(a, b); //alex perry
-                return [2 /*return*/];
+                _a.sent();
+                return [3 /*break*/, 1];
+            case 3: return [2 /*return*/];
         }
     });
 }
-var gen = sayHello();
-gen.next();
+var gen = idMaker();
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());

@@ -1,24 +1,46 @@
-//Promesas en paralelo
-function loadItem(id: number): Promise<{id: number}> {
-    return new Promise((resolve)=>{
-        console.log('objeto de carga', id);
-        setTimeout(() => {
-        resolve({ id: id });
-         }, 1000);
-    });
+function*	generator(){
+    console.log('Execution	started');
+    yield	0;
+    console.log('Execution	resumed');
+    yield	1;
+    console.log('Execution	resumed');
 }
-let item1, item2;
-loadItem(1)
-    .then((res) => {
-        item1 = res;
-        return loadItem(2);
-    })
-    .then((res) => {
-        item2 = res;
-        console.log('hecho');
-    }); 
-Promise.all([loadItem(1),loadItem(2)])
-    .then((res) => {
-        [item1,item2] = res;
-        console.log('hecho')
-    });
+var	iterator	=	generator();
+console.log('Starting	iteration');
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+
+function* generator2() {
+    try {
+        yield 'foo';
+        throw Error("Test");
+    }
+    catch(err) {
+        console.log(err.message); // bar!
+    }
+}
+var iterator2 = generator2();
+var foo = iterator2.next();
+console.log(foo.value);
+var foo = iterator2.next();
+
+
+function getFirstName() {
+    setTimeout(function(){
+        gen.next('alex')
+    }, 1000);
+}
+function getSecondName() {
+    setTimeout(function(){
+        gen.next('perry')
+    }, 1000);
+}
+function *sayHello() {
+    var a = yield getFirstName();
+    var b = yield getSecondName();
+    console.log(a, b); //alex perry
+}
+var gen = sayHello();
+gen.next();
